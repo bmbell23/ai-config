@@ -1,0 +1,15 @@
+to: [manager@example.com]
+cc: []
+subject: "Weekly Update - DevOps & AI Harness"
+window_days: 7
+sections:
+  - name: EXA DevOps
+    hint: current state, what's bad, what's good, what we're fixing
+    jira: 'project in (ED, EDR, DDNDO)'
+  - name: SFA DevOps
+    hint: current state, migrations, Kubernetes, CI
+    jira: 'project in (SFAP, DDNDO)'
+  - name: AI Harness
+    hint: current state, RCA skills progress, productizing for L3
+    jira: 'project = MLAI'
+reference_email_subject: "Weekly Update - DevOps & AI Harness"

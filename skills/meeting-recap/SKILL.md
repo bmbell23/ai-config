@@ -1,6 +1,6 @@
 ---
 name: meeting-recap
-description: Recap one meeting from its Teams transcript. Posts a short summary to Brandon and writes Confluence notes (Meetings › ‹title› rolling summary › ‹title› › ‹date›), and finds, links or proposes the Jira tickets and Confluence pages asked for out loud. Args are `<title> | <start ISO>`. Use when agent-bus runs `meeting-recap` (queued by `meeting-plan`), or when asked to "recap <meeting>".
+description: Recap one meeting from its Teams transcript. Posts a short summary to Brandon (with a "For you" list of every time Brandon was named or addressed) and writes Confluence notes (Meetings › ‹title› rolling summary › ‹title› › ‹date›), and finds, links or proposes the Jira tickets and Confluence pages asked for out loud. Args are `<title> | <start ISO>`. Use when agent-bus runs `meeting-recap` (queued by `meeting-plan`), or when asked to "recap <meeting>".
 ---
 
 # Meeting recap
@@ -18,7 +18,10 @@ confluence:
   parent: Meetings           # page under the space home; created on first run
 include: []                  # title substrings to recap; empty = all (meeting-plan applies these)
 exclude: []                  # title substrings never to recap
+owner_names: [Brandon, BB]   # every name/nickname the owner answers to; drives "For you"
 ```
+
+If `owner_names` is missing or empty, still write the recap, but leave out **For you** and add the line "For you skipped: set `owner_names` in meeting-recap.local.yaml" to the reply.
 
 ## 1. Transcript
 
@@ -41,6 +44,7 @@ Turn the transcript into notes of who said what. Merge each speaker's consecutiv
 - **Action items**: owner, the action, and a due date if one was said. Mark it `(inferred)` if the owner isn't explicit.
 - **Spoken asks** for Jira or Confluence: "make/file/open a ticket", "is there a ticket for", "find/write/make a page/doc". Note who asked and the timestamp.
 - **Open questions** left unanswered.
+- **For you**: every time the owner was named or addressed. A cue counts when it contains any of `owner_names` (whole word, case-insensitive), or when a speaker says "you" *to the owner*. Decide that from context: the owner spoke just before or answers right after, or the line follows one of their names. A generic "you" said to the room doesn't count, and neither do the owner's own lines. For each hit keep: `HH:MM`, who said it, a short exact quote, and the ask if there was one (`ask: <what they want, by when>`), else `mention`. Merge hits from the same speaker on the same topic within a minute into one.
 
 A conference-room mic (one speaker name for many people, e.g. "Colorado Springs - Phantom Canyon"): attribute from context and add "(room mic; attribution inferred)".
 
@@ -70,7 +74,7 @@ Every page goes in `confluence.space`. Write the bodies in storage format (HTML)
    - **Open action items**: a table of Owner, Item, From (date link) and Status. Add today's items. Mark items done that the transcript says are done. Keep the rest.
    - **Meetings**: the newest date page first (the child pages macro `<ac:structured-macro ac:name="children"/>` is enough).
    A one-off meeting gets the same layout with a single date.
-3. **`‹title› › ‹YYYY-MM-DD›`** under ‹title›, with the date in `tz` of `<start>`. If it exists (a re-run), update it. Sections: Attendees (speakers heard), Summary, Decisions, Action items, Asks (with links), Open questions, Notes (the squashed `HH:MM Name: gist` lines), Source (the event subject and start, and "transcript via M365").
+3. **`‹title› › ‹YYYY-MM-DD›`** under ‹title›, with the date in `tz` of `<start>`. If it exists (a re-run), update it. Sections: **For you** (first, before everything else; see §5 for the order of lines), Attendees (speakers heard), Summary, Decisions, Action items, Asks (with links), Open questions, Notes (the squashed `HH:MM Name: gist` lines), Source (the event subject and start, and "transcript via M365").
 
 If a Confluence write fails, put the exact error in the reply. Still post the summary, add "Confluence not written: ‹error›", and stop there. Don't retry other ways, and don't pull in other agents.
 
@@ -80,12 +84,17 @@ Penny posts this to Brandon, so keep it tight:
 
 ```
 **‹title›** · ‹date› ‹HH:MM›–‹HH:MM› · [notes](‹date page link›)
+**For you:**
+‹action items owned by the owner first: "Action: item (due) · from Name HH:MM"›
+‹then each mention: "HH:MM Name: “quote” → ask: …" or "→ mention"; or "nothing addressed to you"›
 ‹5–8 lines: what happened, what changed, what's blocked›
 **Decisions:** ‹one per line, or "none"›
 **Action items:** ‹Owner: item (due)›, one per line
 **Links:** ‹tickets / pages found or created, as links›
 **Proposed tickets** (reply `go` to file): ‹title · type · teammate›   (only if any)
 ```
+
+**For you** goes right under the header line, before the summary, and the date page uses the same lines. List the owner's action items first, then mentions in time order. If there are more than 8 mentions, show the 8 with asks (or the earliest ones) and add "+N more on the notes page". The date page lists them all. The 5–8 line limit is for the summary only; For you doesn't count toward it.
 
 Name the teammate in Proposed tickets without an `@`. An `@` here would wake them.
 

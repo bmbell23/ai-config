@@ -5,3 +5,4 @@ confluence:
   parent: Meetings                    # created under the space home on first run
 include: []          # title substrings to recap; empty = every meeting with other attendees
 exclude: []         # title substrings never to recap, e.g. ["Interview"]
+owner_names: [Brandon, BB]   # names and nicknames you answer to; recap's "For you" section lists every time one is said

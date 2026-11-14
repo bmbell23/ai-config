@@ -1,0 +1,17 @@
+# Copy to team-update.local.yaml (gitignored) and fill in your team.
+tz: America/Denver
+thread_subject: "DevOps Team - Weekly Update"   # each week is a reply-all in this thread
+to: [team-dl@example.com]
+cc: [manager@example.com]
+window_days: 7
+jira_projects: ["DO", "DOR", "DDNDO", "SFAP"]
+team:                         # everyone here gets a kudos line, in this order
+  - name: Pat                 # as you write it in the email
+    email: pat@example.com
+    jira: "<atlassian-account-id>"   # Jira > profile URL, or GET /rest/api/3/user/search?query=<name>
+    gerrit: pat@example.com   # omit if they don't use Gerrit
+    works_on: Gerrit, CI
+  - name: Sam
+    email: sam@example.com
+    jira: "<atlassian-account-id>"
+    works_on: lab hardware, MAAS

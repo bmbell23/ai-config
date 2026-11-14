@@ -23,7 +23,6 @@ thread_subject: "DevOps Team - Weekly Update"   # each week is a reply-all in th
 to: [team-dl@example.com]
 cc: [boss@example.com]
 window_days: 7                 # fallback when no previous send is found
-jira_projects: ["DO", "DOR", "DDNDO", "SFAP"]
 team:                          # everyone here gets a kudos line, in this order
   - name: Pat                  # as Brandon writes it in the email
     email: pat@example.com
@@ -38,7 +37,7 @@ team:                          # everyone here gets a kudos line, in this order
 2. **Read the last send.** It's the format reference, and it's what not to repeat: don't thank someone for the same thing two weeks running unless it reached a new milestone (then say what's new). Note its **Updates** bullets, since the ones still open get carried forward.
 3. **Gather.** Read only.
    - *Brandon's own words first*: sent mail and Teams messages in the window (`outlook_email_search` sender = Brandon; `chat_message_search` sender = Brandon, words like thank/great/awesome/nice). Praise he already gave someone is the strongest kudos signal. In a 1:1 chat, the other member is who he's thanking.
-   - *Jira*, per person: `assignee = "<jira>" AND (resolved >= "<start>" OR status CHANGED AFTER "<start>")`, within `jira_projects` plus any project the person's tickets turn up. Results are large: keep only key, summary, status and resolution date (save to a file and parse with `python3 -I`). A batch of old tickets all moved the same day is cleanup, not this week's work.
+   - *Jira*, per person: `assignee = "<jira>" AND (resolved >= "<start>" OR status CHANGED BY "<jira>" AFTER "<start>" OR created >= "<start>")`, in any project. Use `CHANGED BY`: bulk moves by someone else (Brandon's DOR workflow migration on 2026-11-10 moved dozens of old tickets to Done) aren't the person's work. Results are large: keep only key, summary, status and resolution date (save to a file and parse with `python3 -I`).
    - *Gerrit*, per person with `gerrit` set: `query_gerrit_changes` `owner:<gerrit> status:merged after:<start>`.
    - *Meetings*: demos, retros and incident reviews in the window (calendar, then the Teams recap or transcript). Presenting a demo counts.
    - *Incidents*: DOR incidents opened, mitigated or closed in the window, and who moved them.

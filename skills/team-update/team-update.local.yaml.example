@@ -4,7 +4,6 @@ thread_subject: "DevOps Team - Weekly Update"   # each week is a reply-all in th
 to: [team-dl@example.com]
 cc: [manager@example.com]
 window_days: 7
-jira_projects: ["DO", "DOR", "DDNDO", "SFAP"]
 team:                         # everyone here gets a kudos line, in this order
   - name: Pat                 # as you write it in the email
     email: pat@example.com

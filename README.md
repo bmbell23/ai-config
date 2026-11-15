@@ -13,6 +13,11 @@ Skills:
 - `team-update`: the weekly "DevOps Team - Weekly Update" email to my team, with a thank-you per person.
 - `meeting-plan`, `meeting-recap`: recap each meeting from its transcript into Confluence.
 
+## Skills
+
+- `weekly-update`: drafts Brandon's weekly status email.
+- `color-by-number`: printable color-by-number page + answer key; the image model draws, `cbn.py` numbers.
+
 `./install.sh` links each skill into `~/.claude/skills`, `~/.claude-work/skills` and `~/.augment/skills`.
 It is idempotent and never overwrites a real file.
 

@@ -1,0 +1,8 @@
+Red #e53935
+Yellow #fdd835
+Blue #64b5f6
+Green #66bb6a
+Orange #fb8c00
+Purple #ab47bc
+Pink #f48fb1
+Brown #a1887f

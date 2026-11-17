@@ -1,0 +1,85 @@
+<!-- maint-email template. Email-safe: tables + inline styles only (Outlook strips <style>).
+     Fill every {{FIELD}}; drop a whole <tr> block when it doesn't apply.
+     STATUS_COLOR: Scheduled #0E7AB8 · Unplanned #C77700 · Incident #C0352B · Completed #2E7D32 -->
+<table role="presentation" width="640" cellpadding="0" cellspacing="0" border="0" style="width:640px;max-width:640px;border-collapse:collapse;font-family:Aptos,Calibri,Helvetica,Arial,sans-serif;color:#1F2937;border:1px solid #D7DEE8;">
+  <!-- Header band -->
+  <tr>
+    <td bgcolor="#0D223D" style="background-color:#0D223D;padding:14px 20px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+        <tr>
+          <td style="font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#69DEFF;font-weight:bold;">{{TEAM}} &middot; Maintenance Notice</td>
+          <td align="right"><span style="display:inline-block;background-color:{{STATUS_COLOR}};color:#FFFFFF;font-size:12px;font-weight:bold;padding:4px 10px;border-radius:3px;">{{STATUS}}</span></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr><td bgcolor="#69DEFF" style="background-color:#69DEFF;height:4px;line-height:4px;font-size:0;">&nbsp;</td></tr>
+  <!-- Title + one-line summary -->
+  <tr>
+    <td style="padding:20px 20px 6px 20px;">
+      <div style="font-size:22px;font-weight:bold;color:#0D223D;line-height:1.25;">{{TITLE}}</div>
+      <div style="font-size:15px;color:#4B5563;padding-top:4px;">{{WHEN_SHORT}}</div>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:10px 20px 16px 20px;font-size:15px;line-height:1.5;">{{SUMMARY}}</td>
+  </tr>
+  <!-- Key facts -->
+  <tr>
+    <td style="padding:0 20px 18px 20px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-size:14px;line-height:1.45;">
+        <tr>
+          <td width="150" bgcolor="#EEF3F8" style="background-color:#EEF3F8;padding:8px 12px;font-weight:bold;color:#0D223D;border-bottom:1px solid #FFFFFF;vertical-align:top;">When</td>
+          <td style="padding:8px 12px;border-bottom:1px solid #E5E9F0;vertical-align:top;">{{WHEN_LONG}}</td>
+        </tr>
+        <tr>
+          <td bgcolor="#EEF3F8" style="background-color:#EEF3F8;padding:8px 12px;font-weight:bold;color:#0D223D;border-bottom:1px solid #FFFFFF;vertical-align:top;">Expected downtime</td>
+          <td style="padding:8px 12px;border-bottom:1px solid #E5E9F0;vertical-align:top;">{{DURATION}}</td>
+        </tr>
+        <tr>
+          <td bgcolor="#EEF3F8" style="background-color:#EEF3F8;padding:8px 12px;font-weight:bold;color:#0D223D;border-bottom:1px solid #FFFFFF;vertical-align:top;">Affected</td>
+          <td style="padding:8px 12px;border-bottom:1px solid #E5E9F0;vertical-align:top;">{{AFFECTED}}</td>
+        </tr>
+        <tr>
+          <td bgcolor="#EEF3F8" style="background-color:#EEF3F8;padding:8px 12px;font-weight:bold;color:#0D223D;border-bottom:1px solid #FFFFFF;vertical-align:top;">Not affected</td>
+          <td style="padding:8px 12px;border-bottom:1px solid #E5E9F0;vertical-align:top;">{{UNAFFECTED}}</td>
+        </tr>
+        <tr>
+          <td bgcolor="#EEF3F8" style="background-color:#EEF3F8;padding:8px 12px;font-weight:bold;color:#0D223D;vertical-align:top;">Tracking</td>
+          <td style="padding:8px 12px;vertical-align:top;">{{TICKET_LINKS}}</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <!-- What you need to do -->
+  <tr>
+    <td style="padding:0 20px 6px 20px;font-size:13px;letter-spacing:1px;text-transform:uppercase;font-weight:bold;color:#0E7AB8;">What you need to do</td>
+  </tr>
+  <tr>
+    <td style="padding:0 20px 16px 20px;font-size:14px;line-height:1.5;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;border-left:4px solid #69DEFF;">
+        <tr><td style="padding:4px 12px;font-size:14px;line-height:1.5;color:#1F2937;"><b>Before:</b> {{TODO_BEFORE}}</td></tr>
+        <tr><td style="padding:4px 12px;font-size:14px;line-height:1.5;color:#1F2937;"><b>During:</b> {{TODO_DURING}}</td></tr>
+        <tr><td style="padding:4px 12px;font-size:14px;line-height:1.5;color:#1F2937;"><b>After:</b> {{TODO_AFTER}}</td></tr>
+      </table>
+    </td>
+  </tr>
+  <!-- Why -->
+  <tr>
+    <td style="padding:0 20px 6px 20px;font-size:13px;letter-spacing:1px;text-transform:uppercase;font-weight:bold;color:#0E7AB8;">Why</td>
+  </tr>
+  <tr>
+    <td style="padding:0 20px 16px 20px;font-size:14px;line-height:1.5;">{{WHY}}</td>
+  </tr>
+  <!-- What's next (drop this block for routine work) -->
+  <tr>
+    <td style="padding:0 20px 6px 20px;font-size:13px;letter-spacing:1px;text-transform:uppercase;font-weight:bold;color:#0E7AB8;">What's next</td>
+  </tr>
+  <tr>
+    <td style="padding:0 20px 18px 20px;font-size:14px;line-height:1.5;">{{NEXT}}</td>
+  </tr>
+  <!-- Footer -->
+  <tr>
+    <td bgcolor="#F5F7FA" style="background-color:#F5F7FA;padding:12px 20px;font-size:13px;color:#4B5563;line-height:1.5;border-top:1px solid #E5E9F0;">{{FOOTER}}</td>
+  </tr>
+</table>

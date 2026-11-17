@@ -1,9 +1,6 @@
 # Copy to maint-email.local.yaml (gitignored) and fill in.
-team: Lab DevOps                      # header band text
-sender:
-  name: Your Name
-  title: Your Title
-support: ops-help@example.com         # footer contact
+team: Lab DevOps                      # header band text, and the subject: "<team> · Maintenance Notice"
+support: ops-help@example.com         # footer: "Questions? Contact <name>."
 zones:                                # first is the headline time (and the subject's); the rest go on the second line
   - {label: MT, tz: America/Denver}
   - {label: ET, tz: America/New_York}
@@ -11,8 +8,8 @@ zones:                                # first is the headline time (and the subj
 jira_projects: [OPS, LAB]             # where to look for the tracking ticket
 lists:                                # pick by host or audience
   lab:
-    to: [dev-list@example.com, test-list@example.com]
-    cc: [qa-list@example.com, ops-help@example.com]
+    to: [dev-list@example.com, qa-list@example.com]
+    cc: [ops-help@example.com]
 hosts:                                # optional facts per host, used for Affected / Not affected
   fs-01:
     list: lab

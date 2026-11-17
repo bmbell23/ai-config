@@ -1,0 +1,76 @@
+<table role="presentation" width="640" cellpadding="0" cellspacing="0" border="0" style="width:640px;max-width:640px;border-collapse:collapse;font-family:Aptos,Calibri,Helvetica,Arial,sans-serif;color:#1F2937;border:1px solid #D7DEE8;">
+    <tr>
+    <td bgcolor="#0D223D" style="background-color:#0D223D;padding:14px 20px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">
+        <tr>
+          <td style="font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:#69DEFF;font-weight:bold;">Lab DevOps &middot; Maintenance Notice</td>
+          <td align="right"><span style="display:inline-block;background-color:#C77700;color:#FFFFFF;font-size:12px;font-weight:bold;padding:4px 10px;border-radius:3px;">UNPLANNED</span></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr><td bgcolor="#69DEFF" style="background-color:#69DEFF;height:4px;line-height:4px;font-size:0;">&nbsp;</td></tr>
+    <tr>
+    <td style="padding:20px 20px 6px 20px;">
+      <div style="font-size:22px;font-weight:bold;color:#0D223D;line-height:1.25;">fs-01 reboot tonight</div>
+      <div style="font-size:15px;color:#4B5563;padding-top:4px;">Tuesday, Nov 17 &middot; 5:30 PM MT &middot; about 15 minutes</div>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:10px 20px 16px 20px;font-size:15px;line-height:1.5;">We're rebooting <b>fs-01</b> tonight. Its memory has become fragmented again, the same problem we fixed with the reboot on 11/04. While it restarts, its NFS shares and NIS logins will be unavailable for about 15 minutes.</td>
+  </tr>
+    <tr>
+    <td style="padding:0 20px 18px 20px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-size:14px;line-height:1.45;">
+        <tr>
+          <td width="150" bgcolor="#EEF3F8" style="background-color:#EEF3F8;padding:8px 12px;font-weight:bold;color:#0D223D;border-bottom:1px solid #FFFFFF;vertical-align:top;">When</td>
+          <td style="padding:8px 12px;border-bottom:1px solid #E5E9F0;vertical-align:top;"><b>Tue, Nov 17, 5:30&ndash;5:45 PM MT</b><br><span style="color:#6B7280;">Tue 7:30&ndash;7:45 PM ET &middot; Wed, Nov 18, 6:00&ndash;6:15 AM IST</span></td>
+        </tr>
+        <tr>
+          <td bgcolor="#EEF3F8" style="background-color:#EEF3F8;padding:8px 12px;font-weight:bold;color:#0D223D;border-bottom:1px solid #FFFFFF;vertical-align:top;">Expected downtime</td>
+          <td style="padding:8px 12px;border-bottom:1px solid #E5E9F0;vertical-align:top;">~15 minutes. We'll send an all-clear when it's back.</td>
+        </tr>
+        <tr>
+          <td bgcolor="#EEF3F8" style="background-color:#EEF3F8;padding:8px 12px;font-weight:bold;color:#0D223D;border-bottom:1px solid #FFFFFF;vertical-align:top;">Affected</td>
+          <td style="padding:8px 12px;border-bottom:1px solid #E5E9F0;vertical-align:top;">Everything served by fs-01: <b>/home</b>, logs and the other NFS shares, plus <b>NIS logins</b>. Anything that mounts them (dev VMs, CI jobs that read or write logs) will hang until fs-01 is back.</td>
+        </tr>
+        <tr>
+          <td bgcolor="#EEF3F8" style="background-color:#EEF3F8;padding:8px 12px;font-weight:bold;color:#0D223D;border-bottom:1px solid #FFFFFF;vertical-align:top;">Not affected</td>
+          <td style="padding:8px 12px;border-bottom:1px solid #E5E9F0;vertical-align:top;">Storage controllers, and any system that doesn't mount fs-01.</td>
+        </tr>
+        <tr>
+          <td bgcolor="#EEF3F8" style="background-color:#EEF3F8;padding:8px 12px;font-weight:bold;color:#0D223D;vertical-align:top;">Tracking</td>
+          <td style="padding:8px 12px;vertical-align:top;"><a href="https://jira.example.com/browse/OPS-1411" style="color:#0E7AB8;">OPS-1411</a> &middot; previous occurrence: <a href="https://jira.example.com/browse/OPS-1038" style="color:#0E7AB8;">OPS-1038</a> &middot; root-cause work: <a href="https://jira.example.com/browse/OPS-1383" style="color:#0E7AB8;">OPS-1383</a></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+    <tr>
+    <td style="padding:0 20px 6px 20px;font-size:13px;letter-spacing:1px;text-transform:uppercase;font-weight:bold;color:#0E7AB8;">What you need to do</td>
+  </tr>
+  <tr>
+    <td style="padding:0 20px 16px 20px;font-size:14px;line-height:1.5;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;border-left:4px solid #69DEFF;">
+        <tr><td style="padding:4px 12px;font-size:14px;line-height:1.5;color:#1F2937;"><b>Before:</b> Save open work in /home, and don't start long jobs or CI runs that write to fs-01 after 5:00 PM MT.</td></tr>
+        <tr><td style="padding:4px 12px;font-size:14px;line-height:1.5;color:#1F2937;"><b>During:</b> Shells and editors on a dev VM may freeze when they touch /home. Wait it out; don't reboot your VM.</td></tr>
+        <tr><td style="padding:4px 12px;font-size:14px;line-height:1.5;color:#1F2937;"><b>After:</b> Everything should resume by itself. If something still hangs 15 minutes after the all-clear, reply to this email.</td></tr>
+      </table>
+    </td>
+  </tr>
+    <tr>
+    <td style="padding:0 20px 6px 20px;font-size:13px;letter-spacing:1px;text-transform:uppercase;font-weight:bold;color:#0E7AB8;">Why</td>
+  </tr>
+  <tr>
+    <td style="padding:0 20px 16px 20px;font-size:14px;line-height:1.5;">fs-01 runs an old kernel that fragments its memory over time. Once memory is fragmented, fs-01 can't set up new InfiniBand connections to its storage. Storage paths that drop can't reconnect, so we slowly lose redundancy. A reboot resets the memory layout. It took 31 days to reach this state last time; this time it took 13.</td>
+  </tr>
+    <tr>
+    <td style="padding:0 20px 6px 20px;font-size:13px;letter-spacing:1px;text-transform:uppercase;font-weight:bold;color:#0E7AB8;">What's next</td>
+  </tr>
+  <tr>
+    <td style="padding:0 20px 18px 20px;font-size:14px;line-height:1.5;">The lasting fix is moving off fs-01. That plan is in <a href="https://jira.example.com/browse/OPS-1400" style="color:#0E7AB8;">OPS-1400</a> and gets reviewed Thursday, Nov 19. Until then, we'll announce any further reboots the same way.</td>
+  </tr>
+    <tr>
+    <td bgcolor="#F5F7FA" style="background-color:#F5F7FA;padding:12px 20px;font-size:13px;color:#4B5563;line-height:1.5;border-top:1px solid #E5E9F0;">Questions? Reply to this email or contact <a href="mailto:ops-help@example.com" style="color:#0E7AB8;">ops-help</a>.</td>
+  </tr>
+</table>
+<p style="font-family:Aptos,Calibri,Helvetica,Arial,sans-serif;font-size:14px;color:#1F2937;margin:14px 0 0 0;">Thank you for your patience,<br><b>Your Name</b><br><i>Your Title</i></p>

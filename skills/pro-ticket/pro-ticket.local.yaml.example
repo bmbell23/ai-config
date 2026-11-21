@@ -1,0 +1,66 @@
+# Copy to pro-ticket.local.yaml (gitignored) and fill in from your Jira:
+#   GET issue/createmeta/<project>/issuetypes/<id>   create-screen fields and options
+#   GET issue/<key>/editmeta                         edit-screen fields (on any filed ticket)
+#   GET field/<field>/context, then field/<field>/context/<ctx>/option   one select's options
+#   GET project/<project>/components
+project: OPS
+reference_ticket: OPS-100          # a filed ticket to read first: match its depth and tone
+requestor: "<atlassian-account-id>"  # default Requestor (you)
+tz: America/Denver
+lead_weeks: 4                      # Requested Delivery Date / Required By, about this far out
+padding: 0.20                      # added to the parts total: tax, shipping, price movement
+fiscal_year_start_month:           # e.g. 1 or 7; empty = leave Fiscal Year/Quarter blank and ask
+
+issue_types:
+  hardware: "10001"
+  cloud: "10002"
+  service: "10003"
+
+fields:
+  create:                          # on the create screen
+    product_team: customfield_10100      # required, select
+    initiative_area: customfield_10101   # required, select
+    delivery_date: customfield_10102     # required, YYYY-MM-DD (Requested Delivery Date)
+    estimated_cost: customfield_10103    # number, USD
+    requestor: customfield_10104         # user: {"accountId": ...}
+    configuration: customfield_10105     # rich text (Requested Configuration)
+    enables: customfield_10106           # rich text (What does it enable?)
+    if_not_bought: customfield_10107     # rich text (What happens if we don't buy it?)
+    why_not_existing: customfield_10108  # rich text (Why can't existing hardware do it?)
+  edit:                            # only on the edit screen: set with an update after create
+    acceptance_criteria: customfield_10110  # rich text
+    site: customfield_10111              # select
+    lab_location: customfield_10112      # text
+    team_project: customfield_10113      # select
+    requested_on: customfield_10114      # date
+    required_by: customfield_10115       # date
+    avg_power_kw: customfield_10116      # number (Estimated Avg. Power (kW))
+    customer_impact: customfield_10117   # rich text
+    fiscal_year: customfield_10118       # select
+    fiscal_quarter: customfield_10119    # select
+    # system fields here too: priority, components
+
+procurement_only: [Approved By, Approved On, Approvers, PO Number, PR Number, Financial IDs,
+                   Order Details, Total Cost, Requisition Number]
+
+options:                           # value -> option id
+  product_team: {Storage: "20001", Compute: "20002"}
+  initiative_area: {Hardware Platforms: "20010", Horizontal: "20011", Drives: "20012"}
+  site: {"Main lab": "20020", "Second lab": "20021"}
+  team_project: {Storage: "20030", QA: "20031"}
+  component: {Storage: "20040", Compute: "20041"}
+  priority: {P0: "10006", P1: "10007", P2: "10008", P3: "10009"}
+  fiscal_year: {"2026": "20050", "2027": "20051"}
+  fiscal_quarter: {Q1: "20060", Q2: "20061", Q3: "20062", Q4: "20063"}
+
+defaults:
+  product_team: Storage
+  initiative_area: Horizontal       # shared lab and CI infrastructure
+  site: "Main lab"
+  lab_name: "Main lab"              # how Lab / Location names it: "<lab_name>: <host> (<model>), <IP>"
+  team_project: Storage
+  component: Storage
+  priority: P2
+  customer_impact: >-
+    None directly. This is internal engineering infrastructure: CI, code review and developer
+    environments. It speeds up builds and developer work, which shortens delivery to customers.
